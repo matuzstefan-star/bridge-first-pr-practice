@@ -1,6 +1,6 @@
 # Bridge First PR Practice
 
-This repo exist so I could ship my first pull request with Claude Code.
+This repo exists so I could ship my first pull request with Claude Code.
 
 ## About
 

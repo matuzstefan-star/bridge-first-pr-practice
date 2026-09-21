@@ -145,6 +145,12 @@ def solver_report(a: BoardAnalysis, dd: dict) -> str:
         need = c.level + 6
         lines.append(f"Contract {c.level}{c.strain_symbol}: needs {need}, double dummy gives {dd_tricks}"
                      + (" - makes" if dd_tricks >= need else f" - down {need - dd_tricks} at best defense"))
+        if dd_tricks >= 13 and c.level < 7:
+            lines.append(f"Missed: double dummy gives {dd_tricks} tricks, so a grand slam was available")
+        elif dd_tricks >= 12 and c.level < 6:
+            lines.append(f"Missed: double dummy gives {dd_tricks} tricks, so a slam was available")
+        elif c.level < {"NT": 3, "H": 4, "S": 4, "C": 5, "D": 5}[c.strain] and dd_tricks >= {"NT": 9, "H": 10, "S": 10, "C": 11, "D": 11}[c.strain]:
+            lines.append(f"Missed: double dummy gives {dd_tricks} tricks in this strain, so a game was available")
         if a.declarer_tricks is not None:
             diff = a.declarer_tricks - dd_tricks
             how = "matched double dummy" if diff == 0 else (

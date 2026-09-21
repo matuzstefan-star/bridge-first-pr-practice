@@ -132,6 +132,7 @@ class BoardAnalysis:
     fit: int | None = None         # declaring side length in the trump suit
     notes: list = field(default_factory=list)
     tricks: list = field(default_factory=list)  # play_log() result
+    note_kind: str | None = None   # key of the HCP yardstick note, if any
 
     @property
     def steffl_side_score(self) -> int | None:
@@ -148,20 +149,23 @@ def _is_vulnerable(board: Board, pos: str) -> bool:
     return v == "Both" or v == side_of(pos)
 
 
-def _bidding_note(level: int, strain: str, side_hcp: int) -> str | None:
+NOTE_TEXT_EN = {
+    "slam_light": "slam with only {hcp} combined HCP (slams usually want ~33)",
+    "game_light": "game with only {hcp} combined HCP (game usually wants ~25)",
+    "part_heavy": "part-score with {hcp} combined HCP (game values)",
+}
+
+
+def _bidding_kind(level: int, strain: str, side_hcp: int) -> str | None:
     """Very rough HCP yardstick (25 game / 33 slam), not a bidding verdict."""
     game_level = {"NT": 3, "H": 4, "S": 4, "C": 5, "D": 5}[strain]
     if level >= 7:
         return None
     if level >= 6:
-        if side_hcp < 30:
-            return f"slam with only {side_hcp} combined HCP (slams usually want ~33)"
-    elif level >= game_level:
-        if side_hcp < 24:
-            return f"game with only {side_hcp} combined HCP (game usually wants ~25)"
-    elif side_hcp >= 27:
-        return f"part-score with {side_hcp} combined HCP (game values)"
-    return None
+        return "slam_light" if side_hcp < 30 else None
+    if level >= game_level:
+        return "game_light" if side_hcp < 24 else None
+    return "part_heavy" if side_hcp >= 27 else None
 
 
 def analyze_board(board: Board, lin_text: str) -> BoardAnalysis:
@@ -198,9 +202,9 @@ def analyze_board(board: Board, lin_text: str) -> BoardAnalysis:
         result.side_hcp = points[c.declarer] + points[dummy]
         if c.strain != "NT":
             result.fit = sum(len(board.hands[p][c.strain]) for p in (c.declarer, dummy))
-        note = _bidding_note(c.level, c.strain, result.side_hcp)
-        if note:
-            result.notes.append(note)
+        result.note_kind = _bidding_kind(c.level, c.strain, result.side_hcp)
+        if result.note_kind:
+            result.notes.append(NOTE_TEXT_EN[result.note_kind].format(hcp=result.side_hcp))
     return result
 
 

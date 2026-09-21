@@ -81,6 +81,23 @@ class SolverTests(unittest.TestCase):
         self.assertIn("double dummy gives 7 - down 3 at best defense", text)
         self.assertIn("Actual result 8 tricks: 1 trick better than double dummy", text)
 
+    def test_missed_game_note(self):
+        lin = self.LIN.replace("mb|4S", "mb|2S")  # West ends in 2S
+        a = analyze_board(parse_lin(lin), lin)
+        dd = {"table": {p: {d: 10 for d in ("C", "D", "H", "S", "NT")} for p in "NESW"},
+              "par_score": 0, "par_contracts": []}
+        self.assertIn("a game was available", solver_report(a, dd))
+        dd["table"]["W"]["S"] = 8
+        self.assertNotIn("Missed", solver_report(a, dd))
+
+    def test_missed_slam_note(self):
+        a = analyze_board(parse_lin(self.LIN), self.LIN)  # 4S by West
+        dd = {"table": {p: {d: 12 for d in ("C", "D", "H", "S", "NT")} for p in "NESW"},
+              "par_score": 0, "par_contracts": []}
+        self.assertIn("Missed: double dummy gives 12 tricks, so a slam was available", solver_report(a, dd))
+        dd["table"]["W"]["S"] = 10
+        self.assertNotIn("Missed", solver_report(a, dd))
+
     @unittest.skipUnless(solver_python().exists(), "endplay solver env not installed")
     def test_real_solver_board_16(self):
         dd = solve(parse_lin(self.LIN))

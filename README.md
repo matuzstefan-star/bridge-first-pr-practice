@@ -27,11 +27,16 @@ trick table for every declarer/strain, par, and how the actual result compares.
 (`analizor done/solver-env`), called as a subprocess. Set `BRIDGE_SOLVER_PYTHON`
 to point at a different interpreter that has `endplay` installed.
 
-`<source>` is a `fetchlin.php` URL, a handviewer URL with `lin=`, raw LIN text,
+`<source>` is a folder of `.lin` files (identical re-downloads such as `name (1).lin`
+are treated as one hand), a `fetchlin.php` URL, a handviewer URL with `lin=`, raw LIN text,
 or a path to a `.lin`/`.txt` file. Only the chosen username's seat is named in
 the report; the other seats appear as compass directions.
 
 `bridge_analyzer/lin_tools.py` is a copy of the LIN parser from the
 `import-done` skill. Card play (`pc|` tags) is read in `analysis.py`.
+
+`--docx FILE` also writes a Word report (English by default, `--lang ro` for Romanian): summary page, then one page
+per board: diagram, auction, result, double-dummy table, observations.
+`--archive DIR` moves the processed `.lin` files to `DIR` after a successful run.
 
 Run the tests with `python -m unittest discover -s tests -t .`

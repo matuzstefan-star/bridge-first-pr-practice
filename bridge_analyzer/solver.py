@@ -22,7 +22,10 @@ class SolverUnavailable(RuntimeError):
 
 
 def solver_python() -> Path:
-    return Path(os.environ.get("BRIDGE_SOLVER_PYTHON", DEFAULT_PYTHON))
+    if "BRIDGE_SOLVER_PYTHON" in os.environ:
+        return Path(os.environ["BRIDGE_SOLVER_PYTHON"])
+    beside = Path(__file__).resolve().parents[1] / "solver-env" / "Scripts" / "python.exe"
+    return beside if beside.exists() else DEFAULT_PYTHON
 
 
 def _pbn(hand: dict) -> str:

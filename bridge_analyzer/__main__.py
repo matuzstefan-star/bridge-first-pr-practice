@@ -60,6 +60,8 @@ def main(argv: list[str] | None = None) -> int:
     for label, lin, files in collect(args.sources):
         try:
             board = parse_lin(lin, username=args.username)
+            if len(board.hands) != 4:
+                raise ValueError("no hand record found (is the path or link correct?)")
             a = analyze_board(board, lin)
         except (ValueError, KeyError, IndexError) as e:
             print(f"Skipped {label!r}: {e}", file=sys.stderr)

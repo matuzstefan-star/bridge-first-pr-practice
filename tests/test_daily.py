@@ -75,6 +75,11 @@ class DailyTests(unittest.TestCase):
         self.assertIn("Analiză done", text)
         self.assertNotIn("Auction", text)
 
+    def test_missing_file_is_skipped_with_a_message(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            code = main([str(Path(tmp, "nope.lin")), "-o", str(Path(tmp, "t.txt"))])
+        self.assertEqual(code, 1)
+
     def test_result_text_both_languages(self):
         lin = _lin_for(5)
         a = analyze_board(parse_lin(lin), lin)

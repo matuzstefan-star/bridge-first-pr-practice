@@ -13,7 +13,7 @@ from pathlib import Path
 
 from .lin_tools import SUITS
 
-DEFAULT_PYTHON = Path(r"C:\Users\My Computer\agentul meu\analizor done\solver-env\Scripts\python.exe")
+DEFAULT_PYTHON = Path("C:/Users/My Computer/Desktop/agentul meu/analizor done/solver-env/Scripts/python.exe")
 WORKER = Path(__file__).with_name("dd_worker.py")
 
 

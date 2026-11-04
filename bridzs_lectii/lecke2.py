@@ -1,0 +1,201 @@
+import sys
+from bridzs_doc import validate, build
+
+DEALS = [
+    dict(
+        title="1. leosztás – Válasz 1♦ nyitásra: először a főszín",
+        dealer="Észak",
+        N="KJ74 A6 KQ95 J63", S="QT83 Q2 J7642 K5",
+        W="A96 KT85 T83 Q97", E="52 J9743 A AT842",
+        auction=["1♦", "passz", "1♠", "passz", "2♠", "passz", "passz", "passz"],
+        explain=[
+            ("1♦", "14 fp, 4 káró és 4 pikk. Főszínt 5 lap nélkül nem nyitunk, 1SZ-hez (15–17) pedig gyenge, ezért 1♦."),
+            ("1♠", "Dél 5 lapos kárója ellenére a 4 lapos pikkjét mutatja. Gyenge kézzel (6–10 fp) mindig a 4 lapos főszín az első: a káró fit ráér."),
+            ("2♠", "4 lapos pikk támogatás, minimális nyitás."),
+            ("passz", "Dél 8 fp-ja + Észak 12–15 fp-ja nem elég gémhez."),
+        ],
+        lead="♥5 (Nyugat)",
+        play=[
+            "Felvevő: Dél. Vesztők: ♠A, egy kör, ♦A, egy-két treff.",
+            "Minél előbb húzd ki az adukat: Keletnél szingli ♦A van, és lopni akar.",
+            "Reális eredmény: 8–9 ütés, a 2♠ teljesül.",
+        ],
+        lesson="Mellékszín nyitás után a válaszadó először a 4 lapos főszínét mutatja, még hosszabb káró mellett is. A főszín fit a legfontosabb.",
+    ),
+    dict(
+        title="2. leosztás – 4-4 főszínek: alulról felfelé",
+        dealer="Észak",
+        N="AQ63 K5 84 AJ972", S="KJ82 AQ74 T63 Q5",
+        W="T97 JT98 KJ5 K84", E="54 632 AQ972 T63",
+        auction=["1♣", "passz", "1♥", "passz", "1♠", "passz", "4♠", "passz", "passz", "passz"],
+        explain=[
+            ("1♣", "14 fp, 5 treff, 4 pikk."),
+            ("1♥", "Dél két 4 lapos főszínnel az olcsóbbat, a kört mondja (alulról felfelé). Így a pikk fit sem vész el."),
+            ("1♠", "Észak 4 pikket mutat. Nincs 4 lapos köre, ezért nem emel."),
+            ("4♠", "Megvan a 4-4 pikk fit. Dél 12 fp + Észak 12+ fp → gém."),
+        ],
+        lead="♦7 (Kelet)",
+        play=[
+            "Felvevő: Észak. Az ellenfelek elvihetnek két káró ütést, a harmadik kárót már lophatod.",
+            "Négy körben a kör is jó: a negyedik kört az asztalon lopod, vagy eldobhatsz rá egy vesztőt.",
+            "Treff impassz: Dél ♣D-ját indítsd Észak ♣AB felé. A ♣K Nyugatnál van, így legfeljebb egy treffet vesztesz.",
+            "Eredmény: 10–11 ütés. 3SZ-ben az ellenfelek azonnal öt káró ütést vihetnének el!",
+        ],
+        lesson="Két 4 lapos főszínnel 1♥-t válaszolunk. Ha a nyitónak 4 pikkje van, licitálja, és megtaláljuk a 4-4 fitet.",
+    ),
+    dict(
+        title="3. leosztás – 1SZ második licit: 12–14 fp",
+        dealer="Észak",
+        N="Q5 KJ4 AT7 KJ932", S="KT863 Q75 KJ4 74",
+        W="AJ9 T986 Q98 QT8", E="742 A32 6532 A65",
+        auction=["1♣", "passz", "1♠", "passz", "1SZ", "passz", "passz", "passz"],
+        explain=[
+            ("1♣", "14 fp, egyenletes elosztás, 5 treff. 1SZ nyitáshoz (15–17) gyenge."),
+            ("1♠", "5 pikk, 9 fp."),
+            ("1SZ", "Egyenletes elosztás, 12–14 fp, nincs 4 lapos pikk."),
+            ("passz", "Dél 9 fp + Észak legfeljebb 14 fp = max. 23 fp. Gémhez kevés, meghívni sem érdemes (ahhoz 11–12 fp kellene)."),
+        ],
+        lead="♥3 (Kelet)",
+        play=[
+            "Felvevő: Észak. Számold a biztos ütéseket, és állítsd fel a hosszú színeket.",
+            "Káró impassz: Észak felől indíts Dél ♦KB felé. A ♦D Nyugatnál van, így három káró ütés lesz.",
+            "A pikket és a kört is fel tudod állítani: a ♥A és a ♠A kiütése után 2-2 ütés jön.",
+            "Reális eredmény: 7–8 ütés.",
+        ],
+        lesson="1♣/1♦ nyitás után az 1SZ második licit 12–14 fp-t és egyenletes elosztást mutat. A válaszadó összeadja a pontokat: 25 alatt nincs gém.",
+    ),
+    dict(
+        title="4. leosztás – Jacoby 2SZ: a nyitó minimális",
+        dealer="Észak",
+        N="K6 AJ973 T84 KQ5", S="AQ4 KT85 KJ3 962",
+        W="JT98 Q64 A97 T87", E="7532 2 Q652 AJ43",
+        auction=["1♥", "passz", "2SZ", "passz", "4♥", "passz", "passz", "passz"],
+        explain=[
+            ("1♥", "13 fp, 5 kör."),
+            ("2SZ", "Jacoby 2SZ: legalább 4 lapos kör támogatás és 13+ fp, gémig kényszerítő. Ez a 2/1 rendszer legfontosabb emelése."),
+            ("4♥", "A nyitó legerősebb üzenete itt a gyengesége: minimális kéz (12–14 fp), nincs szingli vagy renonsz."),
+            ("passz", "Dél 13 fp + Észak 12–14 fp = max. 27 fp, szlemre (kb. 33 fp) nincs esély."),
+        ],
+        lead="♠2 (Kelet)",
+        play=[
+            "Felvevő: Észak. Adu impassz: Dél felől indíts kört Észak ♥AB felé. A ♥D Nyugatnál van.",
+            "Pikk: ♠K, majd ♠A és ♠D. A harmadik pikkre Észak eldobja a ♣5-öt.",
+            "Vesztők: ♣A és egy-két káró. Eredmény: 10–11 ütés.",
+        ],
+        lesson="Jacoby 2SZ után a nyitó 4♥/4♠ licitje a leggyengébb válasz: minimum, rövid szín nélkül. A válaszadó általában passzol.",
+    ),
+    dict(
+        title="5. leosztás – Jacoby 2SZ: szingli és szlem",
+        dealer="Észak",
+        N="AKJ85 KQ63 7 KT4", S="QT74 AJ2 8653 AQ",
+        W="963 T98 AK42 J98", E="2 754 QJT9 76532",
+        auction=["1♠", "passz", "2SZ", "passz", "3♦", "passz", "4SZ", "passz", "5♥", "passz", "6♠", "passz", "passz", "passz"],
+        explain=[
+            ("1♠", "16 fp, 5 pikk, 4 kör."),
+            ("2SZ", "Jacoby 2SZ: 4 pikk és 13+ fp."),
+            ("3♦", "Szingli vagy renonsz káróban. (Új szín 3-as szinten Jacoby után = rövid szín.)"),
+            ("4SZ", "Dél nagyon örül: a káróban egyetlen figurája sincs, tehát egyetlen pontja sem vész el. Minden lapja hasznos. Megkérdezi a kulcslapokat (RKCB)."),
+            ("5♥", "2 kulcslap (♠A, ♠K), adu dáma nélkül."),
+            ("6♠", "Dél ♠D-ja, ♥A-ja és ♣A-ja mellé 2 kulcslap jött: csak a ♦A hiányzik → kis szlem."),
+        ],
+        lead="♦D (Kelet)",
+        play=[
+            "Felvevő: Észak. Nyugat elviszi a ♦A-t, a további kárókat Észak lopja.",
+            "Pikk: 5 ütés. Kör: ♥K, ♥D, ♥A; a negyedik kör is jó (3-3 elosztás), vagy az asztalon lopod.",
+            "Treff: ♣A, ♣D, ♣K = 3 ütés. Összesen 12 ütés.",
+        ],
+        lesson="Jacoby 2SZ után a nyitó új szín licitje 3-as szinten rövid színt mutat. Ha a partnernek ott nincsenek figurái (»üres« szín), a kezek nagyon jól illeszkednek: gondolj a szlemre!",
+    ),
+    dict(
+        title="6. leosztás – Jacoby 2SZ, extra erő és kontroll-licitek",
+        dealer="Észak",
+        N="K5 AQT74 AJ3 K82", S="A84 KJ93 86 AQJ5",
+        W="QJT9 86 KQT9 T97", E="7632 52 7542 643",
+        auction=["1♥", "passz", "2SZ", "passz", "3♥", "passz", "4♣", "passz", "4♦", "passz", "4SZ", "passz", "5♠", "passz", "6♥", "passz", "passz", "passz"],
+        explain=[
+            ("1♥", "17 fp, 5 kör, egyenletes elosztás."),
+            ("2SZ", "Jacoby 2SZ: 4 kör, 13+ fp."),
+            ("3♥", "Extra erő (15+ fp), nincs rövid szín. A lassú 3♥ erősebb, mint a 4♥."),
+            ("4♣", "Kontroll-licit (cue bid): »Szlemet keresek, treffben van ászom.« A kör már az adu, ezért az új szín itt nem természetes."),
+            ("4♦", "Kontroll-licit: káró ász. (A legolcsóbb kontrollt licitáljuk.)"),
+            ("4SZ", "RKCB: hány kulcslapod van?"),
+            ("5♠", "2 kulcslap (♥A, ♦A) + az adu dáma."),
+            ("6♥", "Mind az 5 kulcslap és a ♥D megvan → kis szlem."),
+        ],
+        lead="♠2 (Kelet)",
+        play=[
+            "Felvevő: Észak. Két körben húzd ki az adukat (2-2 elosztás).",
+            "Ütések: 5 kör + ♠A, ♠K + ♦A + 4 treff (♣K, ♣A, ♣D, ♣B) = 12.",
+            "Észak két vesztő káróját Dél lophatja: így akár 13 ütés is lehet.",
+        ],
+        lesson="Kontroll-licit: miután megvan a fit és a szlem érdeklődés, az ászainkat (kontrolljainkat) licitáljuk, az olcsóbbal kezdve. Utána jöhet a 4SZ.",
+    ),
+    dict(
+        title="7. leosztás – RKCB: amikor meg kell állni",
+        dealer="Észak",
+        N="QJ4 KT863 KQ5 J7", S="AK6 QJ92 JT4 AKQ",
+        W="T987 A7 987 T986", E="532 54 A632 5432",
+        auction=["1♥", "passz", "2SZ", "passz", "4♥", "passz", "4SZ", "passz", "5♣", "passz", "5♥", "passz", "passz", "passz"],
+        explain=[
+            ("1♥", "12 fp, 5 kör."),
+            ("2SZ", "Jacoby 2SZ."),
+            ("4♥", "Minimum, nincs rövid szín."),
+            ("4SZ", "Délnek 20 fp-ja van: 12 + 20 = 32 fp. Érdemes megkérdezni a kulcslapokat."),
+            ("5♣", "1 vagy 4 kulcslap. Itt nyilvánvalóan 1 (a ♥K)."),
+            ("5♥", "Dél 2 kulcslapja (♠A, ♣A) + Észak 1 = 3. Hiányzik 2 kulcslap (♥A, ♦A) → megállunk 5♥-ben!"),
+        ],
+        lead="♦A (Kelet)",
+        play=[
+            "Felvevő: Észak. Az ellenfelek elviszik a ♥A-t és a ♦A-t, minden más a miénk.",
+            "Eredmény: 11 ütés. A 6♥ egy ütéssel bukott volna.",
+        ],
+        lesson="Ha két kulcslap hiányzik, a szlem nem jó, akármennyi pontunk van. Az RKCB épp erre való: megmondja, mikor kell 5-ös szinten megállni.",
+    ),
+    dict(
+        title="8. leosztás – 2/1, lassú emelés, kontroll-licit és RKCB",
+        dealer="Észak",
+        N="AQJ753 84 K6 AJ5", S="KT6 A63 AJT94 K7",
+        W="984 KQJT 875 T98", E="2 9752 Q32 Q6432",
+        auction=["1♠", "passz", "2♦", "passz", "2♠", "passz", "3♠", "passz", "4♣", "passz", "4♥", "passz", "4SZ", "passz", "5♦", "passz", "6♠", "passz", "passz", "passz"],
+        explain=[
+            ("1♠", "15 fp, 6 pikk."),
+            ("2♦", "2/1: 5 káró, gémig kényszerítő."),
+            ("2♠", "6 lapos pikk."),
+            ("3♠", "Pikk fit, lassan: szlem érdeklődés. (A 4♠ minimumot jelentene.)"),
+            ("4♣", "Kontroll-licit: treff ász, Észak is érdeklődik."),
+            ("4♥", "Kontroll-licit: kör ász."),
+            ("4SZ", "RKCB."),
+            ("5♦", "3 kulcslap (♠K, ♥A, ♦A)."),
+            ("6♠", "Mind az 5 kulcslap és a ♠D megvan. A 13. ütés impasszon múlna, ezért a kis szlem a biztos út."),
+        ],
+        lead="♥2 (Kelet)",
+        play=[
+            "Felvevő: Észak. ♥A, két kör adu, ♣A, ♣K, a harmadik treffet lopd az asztalon (♠10), majd az utolsó adu.",
+            "12 biztos ütés: 6 pikk + treff lopás + ♥A + ♦K, ♦A + ♣A, ♣K. A 13. ütés a káró impasszon múlik.",
+        ],
+        lesson="Szlem licit lépésről lépésre: 1) fit, 2) lassú licit = szlem érdeklődés, 3) kontroll-licitek, 4) RKCB, 5) döntés.",
+    ),
+]
+
+BASICS_2 = [
+    ("Válasz 1♣/1♦ nyitásra: ", "a 4 lapos főszín az első, még hosszabb káró mellett is (gyenge kézzel). Két 4 lapos főszínnel alulról felfelé: 1♥."),
+    ("Nyitó második licitje: ", "1SZ = 12–14 fp, egyenletes elosztás. Új főszín 1-es szinten (pl. 1♣–1♥–1♠) = 4 lap."),
+    ("Jacoby 2SZ: ", "1♥–2SZ vagy 1♠–2SZ = legalább 4 adu és 13+ fp, gémig kényszerítő."),
+    ("A nyitó válaszai Jacoby 2SZ után: ", "új szín 3-as szinten = szingli vagy renonsz; 3♥/3♠ (az adu) = extra erő (15+ fp), nincs rövid szín; 4♥/4♠ = minimum, nincs rövid szín."),
+    ("Kontroll-licit (cue bid): ", "fit után, szlem érdeklődéssel új színt licitálunk, ahol ászunk (vagy renonszunk) van. A legolcsóbbal kezdünk."),
+    ("RKCB 4SZ (1430): ", "5 kulcslap: a 4 ász és az adu király. Válaszok: 5♣ = 1 vagy 4, 5♦ = 0 vagy 3, 5♥ = 2 adu dáma nélkül, 5♠ = 2 adu dámával."),
+    ("Szabály: ", "ha 2 kulcslap hiányzik, megállunk 5-ös szinten. Ha 1 hiányzik, kis szlem; ha egy sem, és megvan a 13 ütés, nagy szlem."),
+    ("Pontszám: ", "gémhez kb. 25 fp, kis szlemhez kb. 33 fp (jó fittel és rövid színnel kevesebb is elég)."),
+]
+
+GLOSS_2 = [
+    ("szingli / renonsz", "singleton / void"),
+    ("kulcslap", "keycard"),
+    ("kontroll-licit", "cue bid (control bid)"),
+    ("kis szlem / nagy szlem", "small slam / grand slam"),
+]
+
+if __name__ == "__main__":
+    validate(DEALS)
+    build(DEALS, sys.argv[1], "A 2/1 licitrendszer (Two over One Game Force) – 2. lecke: 8 gyakorló leosztás",
+          "A 2. lecke témái", BASICS_2, GLOSS_2)

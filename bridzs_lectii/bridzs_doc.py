@@ -326,7 +326,7 @@ def para(doc, text="", style=None, bold_prefix=None):
     return p
 
 
-def build(deals, out, subtitle, basics_title, basics, extra_gloss=()):
+def build(deals, out, subtitle, basics_title, basics, extra_gloss=(), opp_note="Az ellenfelek (Kelet–Nyugat) mindig passzolnak, hogy a saját licitünkre koncentrálhass."):
     doc = Document()
     sec = doc.sections[0]
     sec.page_height, sec.page_width = Cm(29.7), Cm(21)
@@ -358,7 +358,7 @@ def build(deals, out, subtitle, basics_title, basics, extra_gloss=()):
     doc.add_paragraph("Hogyan használd", style="Heading 1")
     for t in [
         "Minden leosztásnál először takard le a többi kezet, és nézd csak Észak és Dél lapjait. Próbáld meg magad kilicitálni, mielőtt elolvasod a magyarázatot.",
-        "Az ellenfelek (Kelet–Nyugat) mindig passzolnak, hogy a saját licitünkre koncentrálhass.",
+        opp_note,
         "Utána olvasd el a licitmagyarázatot, végül a játéktervet. Minden leosztás végén egy rövid tanulság foglalja össze a lényeget.",
     ]:
         doc.add_paragraph(t, style="List Bullet")

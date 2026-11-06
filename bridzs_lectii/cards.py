@@ -5,6 +5,12 @@ from PIL import Image, ImageDraw, ImageFont
 
 import bridzs_doc
 import lecke2
+import lecke3
+import lecke4
+import lecke5
+import lecke6
+import lecke7
+import lecke8
 from bridzs_doc import SUITS, SYM, HCP, hu, parse
 
 FONTS = r"C:\Windows\Fonts"
@@ -73,7 +79,7 @@ def teacher(lesson, num, deal, student, path):
 
 
 def main(root, student="S"):
-    for lesson, deals in ((1, bridzs_doc.DEALS), (2, lecke2.DEALS)):
+    for lesson, deals in ((1, bridzs_doc.DEALS), (2, lecke2.DEALS), (3, lecke3.DEALS), (4, lecke4.DEALS), (5, lecke5.DEALS), (6, lecke6.DEALS), (7, lecke7.DEALS), (8, lecke8.DEALS)):
         out = os.path.join(root, f"Lapok_Lecke_{lesson}")
         os.makedirs(out, exist_ok=True)
         for f in os.listdir(out):

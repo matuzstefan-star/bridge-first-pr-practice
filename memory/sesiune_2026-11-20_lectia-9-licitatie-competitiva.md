@@ -27,6 +27,15 @@ La început am lucrat pe `main`, unde există doar Lecțiile 1–2. Am numit lec
 - Lecția 4: tema „Közbeszólás” a fost scurtată, ca introducerea să încapă din nou pe o pagină.
 - Documentele au fost regenerate și copiate pe Desktop. Artefact cu Lecția 9: https://claude.ai/artifact/FmTdtVqRDxPQxaobus6jDk
 
+## Artefact, commit, PR
+- Pagina web a Lecției 9 (privată, generată din `lecke9.py`): https://claude.ai/artifact/FmTdtVqRDxPQxaobus6jDk, cu butonul „Csak Dél lapjai”, care ascunde celelalte mâini. Generatorul paginii a fost un script temporar (scratchpad), nu e în proiect.
+- Commit `ab24e25` pe `claude/lectii-licitatie-competitiva-a284b6`, peste `d6bab80` (Lecțiile 3–8).
+- PR [matuzstefan-star/bridge-first-pr-practice#5](https://github.com/matuzstefan-star/bridge-first-pr-practice/pull/5) către main, deschis, fără conflicte, fără CI. Merge-ul îl face Steffy după ce verifică lecțiile.
+
+## Pași următori
+- Steffy verifică planurile de joc și termenii, apoi face merge la PR #5.
+- Următoarea lecție nouă primește numărul 10.
+
 ## De verificat de Steffy
 - Planurile de joc (manual, fără solver), mai ales D3 (1SZ face exact 7 dacă se numără), D6–D8 (numărul de căderi estimat).
 - Termenii noi: csapdapassz, újranyitó kontra.

@@ -1,0 +1,202 @@
+import sys
+from bridzs_doc import validate, build
+
+DEALS = [
+    dict(
+        title="1. leosztás – A nyitó emelése: minimum",
+        dealer="Észak",
+        N="A5 KQ73 J4 QT862", S="K74 AJ85 T95 943",
+        W="8632 942 KQ63 KJ", E="QJT9 T6 A872 A75",
+        auction=["1♣", "passz", "1♥", "passz", "2♥", "passz", "passz", "passz"],
+        explain=[
+            ("1♣", "12 fp, 5 treff, 4 kör. Főszínt 5 lap nélkül nem nyitunk."),
+            ("1♥", "8 fp, 4 kör."),
+            ("2♥", "4 lapos kör, minimális nyitás: 12–15 fp."),
+            ("passz", "Dél 8 fp + Észak legfeljebb 15 fp = 23 fp. Gémhez kevés, meghívni sem érdemes."),
+        ],
+        lead="♠D (Kelet)",
+        play=[
+            "Felvevő: Észak. Ütsz a ♠A-val, és három körben húzd ki az adukat.",
+            "♠K, majd a harmadik pikket a kezedben lopod.",
+            "Treff: két kört elvesztesz (♣A, ♣K), de a ♣D és a két utolsó treff magas lesz.",
+            "Káró: ♦A, ♦K elvész, a harmadik kárót lopod.",
+            "Vesztők: két treff és két káró. Eredmény: 9 ütés.",
+        ],
+        lesson="A nyitó második licitje az erejét mutatja. Az egyszerű emelés (12–15 fp) után a válaszadó általában passzol, ha nincs legalább 10–11 fp-ja.",
+    ),
+    dict(
+        title="2. leosztás – A nyitó ugró emelése: 16–18 fp",
+        dealer="Észak",
+        N="AQ73 5 AK863 K72", S="KJ84 863 Q5 Q964",
+        W="T92 A742 J72 A85", E="65 KQJT9 T94 JT3",
+        auction=["1♦", "passz", "1♠", "passz", "3♠", "passz", "4♠", "passz", "passz", "passz"],
+        explain=[
+            ("1♦", "16 fp, 5 káró, 4 pikk."),
+            ("1♠", "8 fp, 4 pikk."),
+            ("3♠", "Ugró emelés: 4 lapos pikk és 16–18 fp. Meghívás a gémre, nem kényszerítő."),
+            ("4♠", "Dél 8 fp-ja a meghívásnál elég: 16 + 8 = 24 fp, jó adukkal és a ♦D-val."),
+        ],
+        lead="♥K (Kelet)",
+        play=[
+            "Felvevő: Észak. Kelet viszi a ♥K-t, a második kört a kezedben lopod.",
+            "Három körben húzd ki az adukat: Nyugatnál 3 van.",
+            "Káró: ♦D, majd ♦A, ♦K. A kárók 3-3-ban vannak: a két utolsó káró is magas.",
+            "Treff: Dél felől indíts a ♣K felé. Nyugat ♣A-ja egy vesztő, és még egy treff elvész.",
+            "Vesztők: ♥K, két treff. Eredmény: 10 ütés.",
+        ],
+        lesson="A nyitó emelése a pontjait mondja el: egyszerű emelés 12–15 fp, ugró emelés 16–18 fp, emelés a gémbe 19+ fp.",
+    ),
+    dict(
+        title="3. leosztás – A nyitó emelése a gémbe: 19+ fp",
+        dealer="Észak",
+        N="A2 AK85 K3 AQ974", S="J864 QJ73 Q94 62",
+        W="753 942 JT76 KJT", E="KQT9 T6 A852 853",
+        auction=["1♣", "passz", "1♥", "passz", "4♥", "passz", "passz", "passz"],
+        explain=[
+            ("1♣", "20 fp, 5 treff. Ez még nem 2♣ nyitás (ahhoz kb. 22+ fp kell)."),
+            ("1♥", "6 fp, 4 kör: ez már elég a válaszhoz."),
+            ("4♥", "19+ fp és 4 lapos kör: a partner gyenge válasza mellett is van gém."),
+            ("passz", "20 + 6 = 26 fp: a szlemhez kevés, Dél örül a gémnek."),
+        ],
+        lead="♠K (Kelet)",
+        play=[
+            "Felvevő: Észak. Ütsz a ♠A-val, és három körben húzd ki az adukat.",
+            "Treff impassz: az asztalról (♥D bemenet) indíts a ♣AD felé. Nyugat ♣10-et tesz, a ♣D nyer.",
+            "♣A, majd a ♣K-t Nyugat viszi, de a harmadik treff után a többi magas.",
+            "Vesztők: egy pikk, ♦A, ♣K. Eredmény: 10–11 ütés.",
+        ],
+        lesson="Erős nyitó kézzel is 1♣-t mondunk 21 fp-ig, ha az nem egyenletes. A második licit mondja el az erőt.",
+    ),
+    dict(
+        title="4. leosztás – Ugró színismétlés: 6 lap, 16–18 fp",
+        dealer="Észak",
+        N="5 KQ4 A93 AKJ952", S="KJ74 J93 QJ6 843",
+        W="QT96 T862 T87 T7", E="A832 A75 K542 Q6",
+        auction=["1♣", "passz", "1♠", "passz", "3♣", "passz", "3SZ", "passz", "passz", "passz"],
+        explain=[
+            ("1♣", "17 fp, 6 jó treff."),
+            ("1♠", "8 fp, 4 pikk."),
+            ("3♣", "Ugrás a saját színben: 6+ lap és 16–18 fp. Meghívás, nem kényszerítő. (A 2♣ minimális kezet mutatna.)"),
+            ("3SZ", "Dél 8 fp-ja elég, és a pikkben, a körben és a káróban is segít (♠KB, ♥B, ♦DB). Inkább 3SZ, mint 5♣."),
+        ],
+        lead="♠6 (Nyugat, negyedik a legjobb lapjától)",
+        play=[
+            "Felvevő: Dél. Kelet a ♠A-val üt, és visszaad pikket: tedd a ♠B-t. Nyugat ♠D-ja üt, de a ♠K még megvan.",
+            "Treff: ♣A, ♣K: Kelet ♣D-ja leesik (2-2). Hat treff ütés.",
+            "6 treff + ♦A + ♠K = 8 ütés. A kilencedik: a ♥K, ♥D felnövelése a ♥A kiütése után.",
+            "Eredmény: 9 ütés. Az 5♣-hoz 11 ütés kellene, ami nincs meg.",
+        ],
+        lesson="Hosszú szín + 16–18 fp = ugrás a saját színben. A partner dönt, és a 3SZ gyakran jobb, mint az 5-ös szintű mellékszín.",
+    ),
+    dict(
+        title="5. leosztás – 2SZ második licit: 18–19 fp",
+        dealer="Észak",
+        N="AQ5 KJ4 AQ83 K92", S="JT974 Q63 J5 Q74",
+        W="K86 T98 K976 T85", E="32 A752 T42 AJ63",
+        auction=["1♦", "passz", "1♠", "passz", "2SZ", "passz", "3♠", "passz", "4♠", "passz", "passz", "passz"],
+        explain=[
+            ("1♦", "19 fp, egyenletes elosztás. 1SZ-hez (15–17) túl erős, 2SZ nyitáshoz (20–21) gyenge."),
+            ("1♠", "6 fp, 5 pikk."),
+            ("2SZ", "Ugrás: 18–19 fp, egyenletes elosztás. Nem kényszerítő, de a válaszadó 6 fp-tal már licitál: 19 + 6 = 25."),
+            ("3♠", "Kényszerítő: pontosan 5 pikk. »Válassz: 3SZ vagy 4♠!«"),
+            ("4♠", "Észak 3 lapos pikkel a 4♠-ot választja."),
+        ],
+        lead="♥10 (Nyugat)",
+        play=[
+            "Felvevő: Dél. Kelet a ♥A-val üt. A ♥K és a ♥D már a tiéd.",
+            "Adu impassz: ♠B Dél kezéből, Nyugat kicsit tesz, a ♠B nyer. Utána a ♠10, végül a ♠A leejti a ♠K-t.",
+            "Káró impassz: ♦B, Nyugat kicsit tesz, a ♦B nyer. Az asztal ♦A-ja és ♦D-ja után a többi kárót lopod.",
+            "Vesztők: ♥A, ♣A és egy treff. Eredmény: 10–11 ütés.",
+        ],
+        lesson="Egyenletes elosztásnál az 1SZ második licit 12–14 fp, a 2SZ 18–19 fp. A köztes erő (15–17) már az 1SZ nyitás volt. Így a nyitó erejét mindig pontosan tudjuk.",
+    ),
+    dict(
+        title="6. leosztás – Reverz: 17+ fp, egy körig kényszerítő",
+        dealer="Észak",
+        N="5 KT6 AQ82 AKJ83", S="J973 AQ853 74 92",
+        W="Q842 972 JT5 QT4", E="AKT6 J4 K963 765",
+        auction=["1♣", "passz", "1♥", "passz", "2♦", "passz", "2♥", "passz", "3♥", "passz", "4♥", "passz", "passz", "passz"],
+        explain=[
+            ("1♣", "17 fp, 5 treff, 4 káró. A hosszabb színt nyitjuk."),
+            ("1♥", "7 fp, 5 kör."),
+            ("2♦", "Reverz: új szín 2-es szinten, ami magasabb a nyitott színnél. A partner csak 3-as szinten tudna visszatérni a treffre, ezért ez erőt mutat: 17+ fp, egy körig kényszerítő."),
+            ("2♥", "Ismétlés: legalább 5 kör."),
+            ("3♥", "3 lapos kör, a kényszerítő licit után: »Van fit, gondold meg a gémet.«"),
+            ("4♥", "Dél elfogadja: 5 kör + 3 kör, és Észak erős keze elég."),
+        ],
+        lead="♠2 (Nyugat)",
+        play=[
+            "Felvevő: Dél. Kelet viszi a ♠K-t, a második pikket az asztalon lopod.",
+            "Három körben húzd ki az adukat. Az asztal még tud lopni, ha kell.",
+            "Treff impassz: Dél ♣9-ét indítsd a ♣AKB felé. Nyugat kicsit tesz, a ♣B nyer. ♣A, ♣K után a ♣D leesik, és Dél pikkeket dobhat.",
+            "Káró: ♦A, ♦D. Kelet ♦K-ja egy vesztő.",
+            "Vesztők: ♠K, ♦K. Eredmény: 11 ütés.",
+        ],
+        lesson="Reverz: 1♣–1♥–2♦ vagy 1♦–1♠–2♥. A nyitó második színe magasabb az elsőnél, az első szín hosszabb, és 17+ fp van mögötte.",
+    ),
+    dict(
+        title="7. leosztás – Ugrás új színben: gémig kényszerítő",
+        dealer="Észak",
+        N="K4 A5 AKT82 AQ75", S="QJ873 Q94 J3 862",
+        W="952 JT87 Q96 KJ4", E="AT6 K632 754 T93",
+        auction=["1♦", "passz", "1♠", "passz", "3♣", "passz", "3SZ", "passz", "passz", "passz"],
+        explain=[
+            ("1♦", "20 fp, 5 káró, 4 treff. 2♣ nyitáshoz (22+ fp) kevés."),
+            ("1♠", "6 fp, 5 pikk."),
+            ("3♣", "Ugrás új színben: 19+ fp, gémig kényszerítő. Innentől senki sem passzolhat gém előtt."),
+            ("3SZ", "Dél a ♥D fogással a 3SZ-t választja. (A 3♠ 6 lapos pikket mutatna.)"),
+        ],
+        lead="♥B (Nyugat)",
+        play=[
+            "Felvevő: Dél. Az asztal kicsit tesz, Kelet a ♥K-t, és te is kicsit dobsz: így a ♥D megmarad bemenetnek.",
+            "Pikk: a ♠K-t Kelet ♠A-ja üti. Utána a ♠D, ♠B, és a harmadik és negyedik pikk is magas (3-3).",
+            "A ♥D-val menj kézbe, majd treff impassz: kis treff a ♣AD felé, Nyugat kicsit tesz, a ♣D nyer.",
+            "4 pikk + ♥A, ♥D + ♦A, ♦K + ♣A = 9 ütés. A treff és a káró impassz még plusz ütést adhat. Eredmény: 9–10 ütés.",
+        ],
+        lesson="19+ fp-tal a nyitó nem kockáztat: ugrik egy új színben. Ez gémig kényszerítő, így a gyenge partner sem passzolhat.",
+    ),
+    dict(
+        title="8. leosztás – Új mellékszín kényszerítő (NMF)",
+        dealer="Észak",
+        N="A73 KJ4 KQ62 985", S="K6 AQ973 84 KT63",
+        W="QJT9 85 T97 Q742", E="8542 T62 AJ53 AJ",
+        auction=["1♦", "passz", "1♥", "passz", "1SZ", "passz", "2♣", "passz", "2♥", "passz", "4♥", "passz", "passz", "passz"],
+        explain=[
+            ("1♦", "13 fp, 4 káró, egyenletes elosztás."),
+            ("1♥", "12 fp, 5 kör."),
+            ("1SZ", "12–14 fp, egyenletes elosztás."),
+            ("2♣", "Új mellékszín kényszerítő (NMF): 10+ fp, mesterséges, semmit sem mond a treffről! Kérdés: »Van 3 lapos köröd?«"),
+            ("2♥", "Igen, 3 lapos kör. (A 2♦ azt jelentené: nincs 3 lapos kör, és nincs 4 lapos pikk.)"),
+            ("4♥", "Megvan az 5-3 fit, és 13 + 12 = 25 fp: gém."),
+        ],
+        lead="♠D (Nyugat)",
+        play=[
+            "Felvevő: Dél. Ütsz a ♠K-val, majd három körben húzd ki az adukat.",
+            "Üsd ki a ♦A-t: a ♦K, ♦D magas lesz, a harmadik kárót lopod.",
+            "Treff: az asztal felől indíts a ♣K felé. Ha Kelet kicsit tesz, a ♣K nyer. A negyedik treffet az asztalon lopod.",
+            "Vesztők: ♦A, egy-két treff. Eredmény: 10–11 ütés.",
+        ],
+        lesson="1SZ második licit után a 2♣ (vagy 1♣ nyitásnál a 2♦) a kérdés: van-e 3 lapos fit a főszínemhez? Így nem kell találgatni a 3SZ és a 4♥ között.",
+    ),
+]
+
+BASICS_6 = [
+    ("A nyitó erőlépcsői: ", "minimum 12–15 fp, közepes 16–18 fp, erős 19+ fp. A második licit ezt mondja el."),
+    ("Emelés a partner színében: ", "2-es szint = minimum (12–15 fp), 3-as szint = 16–18 fp, 4-es szint = 19+ fp."),
+    ("Színismétlés: ", "2♣/2♦ = 6 lap, minimum; ugrás (3♣/3♦) = 6 lap, 16–18 fp."),
+    ("Egyenletes elosztás: ", "1SZ = 12–14 fp, 2SZ (ugrás) = 18–19 fp. A 15–17 fp már 1SZ nyitás volt."),
+    ("Reverz: ", "1♣–1♥–2♦ vagy 1♦–1♠–2♥: magasabb szín 2-es szinten, 17+ fp, egy körig kényszerítő."),
+    ("Ugrás új színben: ", "1♦–1♠–3♣: 19+ fp, gémig kényszerítő."),
+    ("Új mellékszín kényszerítő (NMF): ", "1♦–1♥–1SZ–2♣: 10+ fp, mesterséges; 3 lapos fitet vagy 4 lapos másik főszínt keres."),
+]
+
+GLOSS_6 = [
+    ("reverz", "reverse"),
+    ("ugrás új színben", "jump shift"),
+    ("új mellékszín kényszerítő", "new minor forcing (NMF)"),
+]
+
+if __name__ == "__main__":
+    validate(DEALS)
+    build(DEALS, sys.argv[1], "A 2/1 licitrendszer (Two over One Game Force) – 6. lecke: 8 gyakorló leosztás",
+          "A 6. lecke témái", BASICS_6, GLOSS_6)

@@ -41,7 +41,7 @@ DEALS = [
         lead="♥B (Nyugat)",
         play=[
             "Felvevő: Dél. Az asztal kicsit tesz. Ha Kelet a ♥K-val üt, Dél kicsit dob, így a ♥D és a ♥A is ütés marad.",
-            "Először a kárót állítsd fel: Kelet a ♦A-val üt, utána négy káró ütésed van.",
+            "Először a kárót növeld fel: Kelet a ♦A-val üt, utána négy káró ütésed van.",
             "Számolás: 4 káró + ♥A, ♥D + ♠K + ♣K = 8 ütés.",
             "Vesztők: ♦A, ♥K, ♠A, ♣A és még egy. Eredmény: 7–8 ütés.",
         ],
@@ -123,7 +123,7 @@ DEALS = [
         play=[
             "Felvevő: Dél. Üss a ♠A-val a kezedben: a ♠K bemenet marad az asztalra.",
             "Káró: ♦K, majd kis káró a ♦A-hoz és a ♦D-hoz. A kárók 3-3-ban vannak, mind az öt ütés.",
-            "A ♥K után a ♥D, ♥B-t is felállítod: Nyugat a ♥A-val üthet.",
+            "A ♥K után a ♥D, ♥B-t is felnöveled: Nyugat a ♥A-val üthet.",
             "5 káró + ♠A, ♠K + 2 kör = 9 ütés. Eredmény: 9–10 ütés.",
         ],
         lesson="1♣/1♦ után a 2SZ válasz 11–12 fp meghívás, a 3SZ válasz 13–15 fp lezárás. Mindkettő nemet mond a 4 lapos főszínre.",

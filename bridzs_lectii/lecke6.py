@@ -83,7 +83,7 @@ DEALS = [
         play=[
             "Felvevő: Dél. Kelet a ♠A-val üt, és visszaad pikket: tedd a ♠B-t. Nyugat ♠D-ja üt, de a ♠K még megvan.",
             "Treff: ♣A, ♣K: Kelet ♣D-ja leesik (2-2). Hat treff ütés.",
-            "6 treff + ♦A + ♠K = 8 ütés. A kilencedik: a ♥K, ♥D felállítása a ♥A kiütése után.",
+            "6 treff + ♦A + ♠K = 8 ütés. A kilencedik: a ♥K, ♥D felnövelése a ♥A kiütése után.",
             "Eredmény: 9 ütés. Az 5♣-hoz 11 ütés kellene, ami nincs meg.",
         ],
         lesson="Hosszú szín + 16–18 fp = ugrás a saját színben. A partner dönt, és a 3SZ gyakran jobb, mint az 5-ös szintű mellékszín.",

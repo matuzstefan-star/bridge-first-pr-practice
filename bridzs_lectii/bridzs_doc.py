@@ -118,7 +118,7 @@ DEALS = [
             "Felvevő: Dél. Ütsz a ♦A-val az asztalon.",
             "Három körben húzd ki az adukat (Nyugatnál 3 adu van). Az asztalon marad egy adu.",
             "♦K, majd a harmadik kárót lopd meg az asztalon.",
-            "A treff vesztőket (♣A és esetleg egy második) a pikk szín felállításával csökkentheted: ♠A, ♠K, majd pikk lopás.",
+            "A treff vesztőket (♣A és esetleg egy második) a pikk szín felnövelésével csökkentheted: ♠A, ♠K, majd pikk lopás.",
             "Eredmény: legalább 11 ütés.",
         ],
         lesson="Ha már gém forsz van, nem kell ugrani. Lassú emelés (3♥) = jobb kéz, ugrás a gémbe (4♥) = minimum.",

@@ -5,15 +5,15 @@ OPP_NOTE = "Ebben a leckében az ellenfelek is licitálnak: ez a téma. Figyeld,
 
 DEALS = [
     dict(
-        title="1. leosztás – Közbelicit után a 2/1 már nem gém forsz",
+        title="1. leosztás – Közbeszólás után a 2/1 már nem gém forsz",
         dealer="Észak",
         N="K4 KQ9752 A76 82", S="73 J6 K85 AQ9743",
         W="965 A4 JT432 KT6", E="AQJT82 T83 Q9 J5",
         auction=["1♥", "1♠", "2♣", "passz", "2♥", "passz", "passz", "passz"],
         explain=[
             ("1♥", "12 fp, 6 kör."),
-            ("1♠", "Kelet közbelicitje: 5+ pikk, kb. 8–16 fp."),
-            ("2♣", "FONTOS: közbelicit után az új szín 2-es szinten már NEM gémig kényszerítő, csak egy körig. Dél 10 fp-tal és 6 jó treffel így is licitálhat. Közbelicit nélkül ehhez 12–13+ fp kellene."),
+            ("1♠", "Kelet közbeszólása: 5+ pikk, kb. 8–16 fp."),
+            ("2♣", "FONTOS: közbeszólás után az új szín 2-es szinten már NEM gémig kényszerítő, csak egy körig. Dél 10 fp-tal és 6 jó treffel így is licitálhat. Közbeszólás nélkül ehhez 12–13+ fp kellene."),
             ("2♥", "6 lapos kör, minimális nyitás."),
             ("passz", "Dél 10 fp + Észak minimális nyitása kb. 22–23 fp. Gémhez kevés, és a kör fit is csak 2 lapos."),
         ],
@@ -24,7 +24,7 @@ DEALS = [
             "Treff: a ♣D-t Nyugat ♣K-ja üti, de utána a ♣A nyer, és a harmadik treffet lopod. Dél hosszú treffjeire eldobhatsz egy kárót.",
             "Vesztők: ♠A, ♥A, ♥10, ♣K, és esetleg egy káró. Eredmény: 8–9 ütés.",
         ],
-        lesson="Jegyezd meg: a 2/1 gém forsz csak akkor él, ha az ellenfél nem licitált. Közbelicit után az új szín 2-es szinten 10+ fp és egy körig kényszerítő.",
+        lesson="Jegyezd meg: a 2/1 gém forsz csak akkor él, ha az ellenfél nem licitált. Közbeszólás után az új szín 2-es szinten 10+ fp és egy körig kényszerítő.",
     ),
     dict(
         title="2. leosztás – Negatív kontra",
@@ -34,7 +34,7 @@ DEALS = [
         auction=["1♦", "1♠", "kontra", "passz", "2♥", "passz", "3♥", "passz", "4♥", "passz", "passz", "passz"],
         explain=[
             ("1♦", "14 fp, 5 káró, 4 kör."),
-            ("1♠", "Kelet közbelicitje."),
+            ("1♠", "Kelet közbeszólása."),
             ("kontra", "Negatív kontra: NEM büntető! Jelentése: »4 körömet mutatom, és legalább 8 fp-om van.« Dél nem mondhat 2♥-t, mert az 5 lapot ígérne."),
             ("2♥", "Észak örül: 4 lapos kör, minimális kéz."),
             ("3♥", "Dél 10 fp: meghívás a gémre."),
@@ -48,7 +48,7 @@ DEALS = [
             "Káró: ♦K, ♦A, ♦D, majd a ♦9-et Dél utolsó adujával lopod. Nyugat ♦B-je leesik, és a ♦3 is magas.",
             "Vesztők: ♠A, ♠K, ♣A. Eredmény: 10 ütés.",
         ],
-        lesson="1♣/1♦ nyitás és közbelicit után a kontra negatív: a másik főszínt mutatja, 8+ fp-tal. Ez a modern licit egyik leghasznosabb eszköze.",
+        lesson="1♣/1♦ nyitás és közbeszólás után a kontra negatív: a másik főszínt mutatja, 8+ fp-tal. Ez a modern licit egyik leghasznosabb eszköze.",
     ),
     dict(
         title="3. leosztás – Az ellenfél színének licitje: erős emelés",
@@ -58,7 +58,7 @@ DEALS = [
         auction=["1♥", "1♠", "2♠", "passz", "4♥", "passz", "passz", "passz"],
         explain=[
             ("1♥", "16 fp, 5 kör."),
-            ("1♠", "Kelet közbelicitje."),
+            ("1♠", "Kelet közbeszólása."),
             ("2♠", "Kontroll-licit az ellenfél színében (cue bid): »Kör fitem van és legalább 10 fp-om.« Dél ezzel különbözteti meg az erős emelést a gyengétől."),
             ("4♥", "Észak 16 fp-ja elég a gémhez. Minimális kézzel 3♥-t mondana."),
         ],
@@ -69,7 +69,7 @@ DEALS = [
             "♦A, majd ♦K és ♦D: a harmadik kárót Dél nem tudja követni, ezért itt eldobhat egy vesztőt.",
             "Treff: ♣A, ♣K, és a harmadik treff elvész. Eredmény: 10 ütés.",
         ],
-        lesson="Közbelicit után: 2♥ = 6–9 fp, 3♥ = gyenge, 4 lap (zavarás), 2♠ (az ellenfél színe) = 10+ fp és fit. A nyitó ebből tudja, kell-e gémet licitálni.",
+        lesson="Közbeszólás után: 2♥ = 6–9 fp, 3♥ = gyenge, 4 lap (zavarás), 2♠ (az ellenfél színe) = 10+ fp és fit. A nyitó ebből tudja, kell-e gémet licitálni.",
     ),
     dict(
         title="4. leosztás – Gyenge ugró emelés: a 9 adu szabálya",
@@ -79,7 +79,7 @@ DEALS = [
         auction=["1♠", "2♥", "3♠", "passz", "passz", "passz"],
         explain=[
             ("1♠", "13 fp, 5 pikk."),
-            ("2♥", "Kelet közbelicitje: jó 7 lapos kör."),
+            ("2♥", "Kelet közbeszólása: jó 7 lapos kör."),
             ("3♠", "Gyenge ugró emelés: 4 adu és kevés pont (4 fp). Nem erőt mutat, hanem zavar: Nyugatnak most 4-es szinten kellene megszólalnia."),
             ("passz", "Észak tudja, hogy Dél gyenge, ezért nincs gém. 5 + 4 = 9 aduval a 3-as szint biztonságos."),
         ],
@@ -117,7 +117,7 @@ DEALS = [
         lesson="Felvételi kontra után a rekontra = 10+ fp, és a leosztás a miénk. Ha az ellenfelek menekülnek, kontrázzuk őket, amikor az adut mi tartjuk.",
     ),
     dict(
-        title="6. leosztás – Dél közbelicitje és Észak erős emelése",
+        title="6. leosztás – Dél közbeszólása és Észak erős emelése",
         dealer="Észak",
         N="K84 A752 J32 Q95", S="AQJ95 Q63 84 K72",
         W="7632 J98 Q65 T84", E="T KT4 AKT97 AJ63",
@@ -125,9 +125,9 @@ DEALS = [
         explain=[
             ("passz", "Észak 10 fp-tal nem nyit."),
             ("1♦", "Kelet nyit: 15 fp, 5 káró, 4 treff."),
-            ("1♠", "Dél közbelicitje: jó 5 lapos pikk, 8–16 fp. Jobb a színt mutatni, mint a kontra, mert csak 3 kör van."),
+            ("1♠", "Dél közbeszólása: jó 5 lapos pikk, 8–16 fp. Jobb a színt mutatni, mint a kontra, mert csak 3 kör van."),
             ("2♦", "Az ellenfél színének licitje: Észak 3 lapos pikket és 10–11 fp-t mutat. A 2♠ gyengébb (6–9 fp) lenne."),
-            ("2♠", "Dél minimális közbelicitje (12 fp): megáll, nincs meg a gém."),
+            ("2♠", "Dél minimális közbeszólása (12 fp): megáll, nincs meg a gém."),
         ],
         lead="♦5 (Nyugat, a partnere színét indítja)",
         play=[
@@ -137,7 +137,7 @@ DEALS = [
             "Treff: Keletnél a ♣A; a ♣K vagy a ♣D egy ütést hoz.",
             "Eredmény: 8–9 ütés. A 4♠ nem teljesülne.",
         ],
-        lesson="Közbelicit: legalább 5 jó lap, 8–16 fp. A partner erős emelését az ellenfél színének licitje mutatja, ugyanúgy, mint a 3. leosztásban.",
+        lesson="Közbeszólás: legalább 5 jó lap, 8–16 fp. A partner erős emelését az ellenfél színének licitje mutatja, ugyanúgy, mint a 3. leosztásban.",
     ),
     dict(
         title="7. leosztás – Felvételi kontra Déltől",
@@ -163,7 +163,7 @@ DEALS = [
         lesson="Felvételi kontra: nyitóerő, rövid az ellenfél színében, a többi 3–4 lapos. A partner nem passzolhat, és az erejét ugrással mutatja.",
     ),
     dict(
-        title="8. leosztás – 1SZ közbelicit és transzfer",
+        title="8. leosztás – 1SZ közbeszólás és transzfer",
         dealer="Észak",
         N="KT874 65 KJ3 K96", S="A93 KJ4 AQ5 J873",
         W="652 732 T9642 T5", E="QJ AQT98 87 AQ42",
@@ -171,7 +171,7 @@ DEALS = [
         explain=[
             ("passz", "Észak 10 fp-tal nem nyit."),
             ("1♥", "Kelet nyit: 15 fp, 5 kör, 4 treff."),
-            ("1SZ", "1SZ közbelicit: 15–18 fp, egyenletes elosztás, és fogás az ellenfél színében (♥KB). Ugyanaz, mint az 1SZ nyitás, csak kicsit erősebb lehet."),
+            ("1SZ", "1SZ közbeszólás: 15–18 fp, egyenletes elosztás, és fogás az ellenfél színében (♥KB). Ugyanaz, mint az 1SZ nyitás, csak kicsit erősebb lehet."),
             ("2♥", "A rendszer tovább él: 2♣ = Stayman, 2♥ = transzfer pikkre, mint az 1. leckében."),
             ("2♠", "Kötelező válasz."),
             ("3SZ", "Pontosan 5 pikk és gém erő: »Válassz: 3SZ vagy 4♠.«"),
@@ -185,23 +185,23 @@ DEALS = [
             "Treff: a ♣A és a ♣D Keletnél van, mindkettő elvész. A harmadik treffet Észak lopja.",
             "Vesztők: ♥A, ♣A, ♣D. Eredmény: 10 ütés.",
         ],
-        lesson="1SZ közbelicit után ugyanaz a rendszer él, mint 1SZ nyitás után. Figyelj a nyitóra: nála vannak a hiányzó figurák, ez segít a játékban.",
+        lesson="1SZ közbeszólás után ugyanaz a rendszer él, mint 1SZ nyitás után. Figyelj a nyitóra: nála vannak a hiányzó figurák, ez segít a játékban.",
     ),
 ]
 
 BASICS_4 = [
-    ("Közbelicit: ", "legalább 5 jó lap, 8–16 fp. 1-es szinten gyengébb is lehet, 2-es szinten kell a jó szín és az erő."),
-    ("A 2/1 közbelicit után: ", "az új szín 2-es szinten NEM gémig kényszerítő, csak egy körig (10+ fp)."),
-    ("Negatív kontra: ", "1♣/1♦ nyitás és közbelicit után a kontra a másik főszínt mutatja, 8+ fp-tal. Nem büntető!"),
-    ("Emelés közbelicit után: ", "egyszerű emelés = 6–9 fp; ugró emelés = gyenge, 4 lap; az ellenfél színének licitje = 10+ fp és fit."),
+    ("Közbeszólás: ", "legalább 5 jó lap, 8–16 fp. 2-es szinten jó szín és több erő kell."),
+    ("A 2/1 közbeszólás után: ", "az új szín 2-es szinten NEM gémig kényszerítő, csak egy körig (10+ fp)."),
+    ("Negatív kontra: ", "1♣/1♦ nyitás és közbeszólás után a kontra a másik főszínt mutatja, 8+ fp-tal. Nem büntető!"),
+    ("Emelés közbeszólás után: ", "egyszerű emelés = 6–9 fp; ugró emelés = gyenge, 4 lap; az ellenfél színének licitje = 10+ fp és fit."),
     ("A 9 adu szabálya: ", "annyi ütésig licitálunk, ahány adunk van együtt (8 adu = 2-es szint, 9 adu = 3-as szint)."),
     ("Rekontra: ", "felvételi kontra után 10+ fp, a leosztás a miénk. Utána a kontra büntető."),
     ("Felvételi kontra: ", "nyitóerő, rövid az ellenfél színében, a többi színben 3–4 lap. A partner köteles licitálni: ugrás = 9–11 fp."),
-    ("1SZ közbelicit: ", "15–18 fp, egyenletes elosztás, fogás az ellenfél színében. A rendszer tovább él (Stayman, transzfer)."),
+    ("1SZ közbeszólás: ", "15–18 fp, egyenletes elosztás, fogás az ellenfél színében. A rendszer tovább él (Stayman, transzfer)."),
 ]
 
 GLOSS_4 = [
-    ("közbelicit", "overcall"),
+    ("közbeszólás", "overcall"),
     ("kontra / rekontra", "double / redouble"),
     ("negatív / felvételi / büntető kontra", "negative / takeout / penalty double"),
 ]

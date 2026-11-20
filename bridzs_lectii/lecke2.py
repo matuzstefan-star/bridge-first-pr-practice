@@ -57,9 +57,9 @@ DEALS = [
         ],
         lead="♥3 (Kelet)",
         play=[
-            "Felvevő: Észak. Számold a biztos ütéseket, és állítsd fel a hosszú színeket.",
+            "Felvevő: Észak. Számold a biztos ütéseket, és növeld fel a hosszú színeket.",
             "Káró impassz: Észak felől indíts Dél ♦KB felé. A ♦D Nyugatnál van, így három káró ütés lesz.",
-            "A pikket és a kört is fel tudod állítani: a ♥A és a ♠A kiütése után 2-2 ütés jön.",
+            "A pikket és a kört is fel tudod növelni: a ♥A és a ♠A kiütése után 2-2 ütés jön.",
             "Reális eredmény: 7–8 ütés.",
         ],
         lesson="1♣/1♦ nyitás után az 1SZ második licit 12–14 fp-t és egyenletes elosztást mutat. A válaszadó összeadja a pontokat: 25 alatt nincs gém.",
